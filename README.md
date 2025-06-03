@@ -54,7 +54,7 @@ volutional and Adversarial Neural Network Enables Improved Mental Stress
  Classification From EEG. IEEE Transactions on Neural Systems and Rehabilitation
  Engineering 30 (2022), 1384–1400. doi:10.1109/TNSRE.2022.3174821
 
-## Citation
+## Citing Us
  Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains
  and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural
  Networks.InACMSIGCAS/SIGCHIConferenceonComputingandSustainable
