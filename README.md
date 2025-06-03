@@ -1,6 +1,6 @@
 # Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks
 
-This repository provides the reference implementation of our **Late-Breaking Work (LBW)** paper accepted at [ACM COMPASS 2025](https://compass.acm.org/). 
+This repository provides the reference implementation of our paper accepted at [ACM COMPASS 2025](https://compass.acm.org/). 
 
 > **Note**: The corresponding ACM Digital Library entry will be updated here once the paper is officially published.
 
@@ -20,12 +20,39 @@ Ours: 43% vs SCANN: 38%
 - 2-class EEG task (500 ms / 100 timesteps):
 Ours: 60% vs SCANN: 50%
 
-> This is a reference implementation accompanying our LBW paper at ACM COMPASS 2025. The repository is still evolving.
+> This is a reference implementation accompanying our paper at ACM COMPASS 2025. The repository is still evolving.
 
 ## Dataset 
+The work makes use of the EEG dataset collected for mental stress classification in [1].
 
+## Code Description 
 
+``` sota.py ``` implements SCANN [2], with certain tweaks. To adapt the model for real-time EEG prediction, two key modifications were made:
 
+1. PCA on Fourier-Transformed EEG Signals:
+Instead of using raw EEG data, the model learns from PCA-reduced components of Fourier-transformed signals. This provides stable, fixed-length features to the network, enabling consistent processing despite the dynamic nature of live EEG input.
+
+2. Adversarial Training with Noise Injection:
+A Generator is trained to produce realistic EEG-like features by injecting structured noise alongside real PCA features. A Discriminator then distinguishes between genuine and generated data, helping the Generator maintain realistic outputs while preserving the original data structure.  
+
+``` rf_snn.py ``` (requires specifying the number of classes) implements the proposed spike-inspired neural architecture ![Neural Architecture](figures/neural_arch.png)
+
+``` python gen_snn_rf.py ``` generates a csv file containing accuracy (when proposed SNN architecture is used) at specified training (= [20, 100, 600]) and testing timesteps (=[20, 100, 200, 300, 600]) of EEG recording (requires specifying path to folder where the data resides). 
+
+``` python gen_sota.py ``` generates a csv file containing accuracy (when modified SCANN is used) at specified training (= [20, 100, 600]) and testing timesteps (=[20, 100, 200, 300, 600]) of EEG recording (requires specifying path to folder where the data resides). 
+
+``` collect_results.py ``` can be used to generate plots to demonstrate the performance of our proposed model and SCANN with the mentioned modifications. 
+## References
+
+[1] Amit Kumar, J.K. Barath, P. Shanmukh, and Deepak Joshi. 2024. StreXNet: A
+ Novel End-to-End Deep Learning Based Improved Multi-Level Mental Stress
+ Classification from EEG Sensors. IEEE Sensors Journal (2024), 1–1. doi:10.1109/
+ JSEN.2024.3506984
+
+[2]  R. Fu, L. Wu, X. Zhang, Y. Huang, J. Jin, and Z. Zhang. 2022. Symmetric Con
+volutional and Adversarial Neural Network Enables Improved Mental Stress
+ Classification From EEG. IEEE Transactions on Neural Systems and Rehabilitation
+ Engineering 30 (2022), 1384–1400. doi:10.1109/TNSRE.2022.3174821
 
 ## Citation
  Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains
