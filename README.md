@@ -37,6 +37,11 @@ A Generator is trained to produce realistic EEG-like features by injecting struc
 
 ``` rf_snn.py ``` (requires specifying the number of classes) implements the proposed spike-inspired neural architecture ![Neural Architecture](figures/neural_arch.png)
 
+ In summary, our work hopes to contribute to the burgeoning field of brain-machine interfaces by leveraging SNNs for decoding EEG signals in real-time by putting forward the following key proposals:  
+[1] A spike-based environment to learn real-time EEG recordings along with decision trees.  
+[2] A feature extraction framework using Fourier Transforms coupled with Principal Component Analysis so that decision trees receive a fixed number of features representing dynamic EEG recordings.  
+[3] A variant of Spike Timing Dependent Plasticity Rule for synaptic weight updates in a spike environment free of sequential loops, thus proposing a vectorised form of STDP updates to make them compatible with hardware acceleration.
+
 ``` python gen_snn_rf.py ``` generates a csv file containing accuracy (when proposed SNN architecture is used) at specified training (= [20, 100, 600]) and testing timesteps (=[20, 100, 200, 300, 600]) of EEG recording (requires specifying path to folder where the data resides). 
 
 ``` python gen_sota.py ``` generates a csv file containing accuracy (when modified SCANN is used) at specified training (= [20, 100, 600]) and testing timesteps (=[20, 100, 200, 300, 600]) of EEG recording (requires specifying path to folder where the data resides). 
