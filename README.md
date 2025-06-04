@@ -60,6 +60,24 @@ volutional and Adversarial Neural Network Enables Improved Mental Stress
  Engineering 30 (2022), 1384–1400. doi:10.1109/TNSRE.2022.3174821
 
 ## Citing Us
+
+``` 
+
+  @inproceedings{bci2025COMPASS,
+  author    = {Amit Kumar and Anannya Mathur and Deepak Joshi},
+  title     = {Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks},
+  booktitle = {Proceedings of the ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS ’25)},
+  year      = {2025},
+  pages     = {1--6},
+  address   = {Toronto, ON, Canada},
+  month     = jul,
+  publisher = {ACM},
+  doi       = {10.1145/3715335.3736311},
+  url       = {https://doi.org/10.1145/3715335.3736311}
+}
+
+```
+
  Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains
  and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural
  Networks.InACMSIGCAS/SIGCHIConferenceonComputingandSustainable
