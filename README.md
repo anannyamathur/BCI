@@ -54,8 +54,7 @@ A Generator is trained to produce realistic EEG-like features by injecting struc
  Classification from EEG Sensors. IEEE Sensors Journal (2024), 1–1. doi:10.1109/
  JSEN.2024.3506984
 
-[2]  R. Fu, L. Wu, X. Zhang, Y. Huang, J. Jin, and Z. Zhang. 2022. Symmetric Con
-volutional and Adversarial Neural Network Enables Improved Mental Stress
+[2]  R. Fu, L. Wu, X. Zhang, Y. Huang, J. Jin, and Z. Zhang. 2022. Symmetric Convolutional and Adversarial Neural Network Enables Improved Mental Stress
  Classification From EEG. IEEE Transactions on Neural Systems and Rehabilitation
  Engineering 30 (2022), 1384–1400. doi:10.1109/TNSRE.2022.3174821
 
@@ -77,5 +76,5 @@ volutional and Adversarial Neural Network Enables Improved Mental Stress
 }
 
 ```
- Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks.In ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS ’25), July 22–25, 2025, Toronto, ON, Canada. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3715335.3736311
+ Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks. In ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS ’25), July 22–25, 2025, Toronto, ON, Canada. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3715335.3736311
 
