@@ -77,9 +77,5 @@ volutional and Adversarial Neural Network Enables Improved Mental Stress
 }
 
 ```
+ Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks.In ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS ’25), July 22–25, 2025, Toronto, ON, Canada. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3715335.3736311
 
- Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains
- and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural
- Networks.InACMSIGCAS/SIGCHIConferenceonComputingandSustainable
- Societies (COMPASS ’25), July 22–25, 2025, Toronto, ON, Canada. ACM, New
- York, NY, USA, 6 pages. https://doi.org/10.1145/3715335.3736311
