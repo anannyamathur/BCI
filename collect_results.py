@@ -5,8 +5,21 @@ import ast
 import os
 import numpy as np
 
+import argparse
+import yaml
+
+def load_config(path):
+    with open(path, 'r') as f:
+        return yaml.safe_load(f)
+
+parser = argparse.ArgumentParser(description="Running neural arch with config")
+parser.add_argument('--config', type=str, default='configs/default.yaml', help='Path to config YAML file')
+
+args = parser.parse_args()
+config = load_config(args.config)
+
 # File paths
-folder= "Results_Folder/"
+folder= config["results"]["path"]
 
 your_model_file = folder +"parameters.csv"
 sota_file = folder + "SOTA/" + "parameters.csv"

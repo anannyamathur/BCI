@@ -43,7 +43,6 @@ perturbation_strength= 0.05 # to avoid rank 1 matrices
 m = 10
 hidden_size= m # top features to consider
 
-#---
 # Create a random forest feature selector here-
 
 from collections import Counter
@@ -592,7 +591,7 @@ def stratified_k_fold(y, k):
 
 # Main function that makes the calls:
 
-def main(dataset,label,group,hidden_layers,time_stamps_train,time_stamps_test,learning,decay,threshold,pre,post,posttau,pretau,bias):
+def main(dataset,label,hidden_layers,time_stamps_train,time_stamps_test,learning,decay,threshold,pre,post,posttau,pretau,bias):
 
     ## Loading data
     

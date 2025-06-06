@@ -1,0 +1,22 @@
+# The default config considers 3 levels of mental stress 
+# that the EEG signals require to be classified into.  
+
+dataset: 
+      name: "EEG_Dataset" 
+      classes: 3 
+      class1: "../Level1_4trials/Level1_4trials" 
+      class2: "../Level2_4trials/Level2_4trials"
+      class3: "../Level3_4trials/Level3_4trials"
+
+results:
+      name: "Folder where results are stored"
+      path: "../Results_Folder/"
+
+training:
+      steps: [20, 100, 600]
+
+testing:
+      steps: [20, 100, 200, 300, 600]
+
+snn:
+   layers: [100,200,30]

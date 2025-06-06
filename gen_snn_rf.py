@@ -1,35 +1,36 @@
-from glob import glob
 import scipy.io
 import numpy as np
 import mne
-import copy
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-import time as t
-import matplotlib.pyplot as plt
-from IPython import get_ipython
 
 import pandas as pd
-
-import sys
-
 import os
-
-import matplotlib.pyplot as plt
-
 import rf_snn as multisnn
 
-# Please mention the path to folder here
+import argparse
+import yaml
 
-folder1= r"../Level1_4trials"    
-folder2=r"../Level2_4trials"
-folder3=r"../Level3_4trials"
+def load_config(path):
+    with open(path, 'r') as f:
+        return yaml.safe_load(f)
+
+parser = argparse.ArgumentParser(description="Running neural arch with config")
+parser.add_argument('--config', type=str, default='configs/default.yaml', help='Path to config YAML file')
+
+args = parser.parse_args()
+config = load_config(args.config)
+
+classes= int(config['dataset']['classes'])
+multisnn.classes= classes
+
+# load folder names 
+folders= dict()
+
+for i in range(1, classes+1):
+    folders[f"class{i}"]= config['dataset'][f"class{i}"]
 
 # Results Generation
 
-folder="../Results_Folder/"
+folder= config["results"]["path"]
 
 if not os.path.isdir(folder):
     
@@ -39,14 +40,6 @@ if not os.path.isdir(folder):
 
 else:
     print("Directory already there")
-
-easy_data = []
-med_data = []
-hard_data = []
-precision=[]
-accuracy=[]
-recall=[]
-f1=[]
 
 def convertmat2mne(data):
     ch_types=['eeg']*63
@@ -60,14 +53,19 @@ def convertmat2mne(data):
 
 # remove subjects 12,20,21,7
 
-for i in range(1,2):
-    easy = folder1+f"\T{i}"
-    med = folder2+f"\T{i}"
-    hard = folder3+f"\T{i}"
+data_list=[]
+label_list=[]
 
-    for temp in os.listdir(easy):
+class_id=0
 
-        read= os.path.join(easy,temp)
+for id in folders:
+
+    level= folders[id] + f"/T{1}"
+    eeg_data_level= []
+
+    for temp in os.listdir(level):
+
+        read= os.path.join(level,temp)
         data=scipy.io.loadmat(read)
         index=temp.replace('.mat','')
 
@@ -78,80 +76,36 @@ for i in range(1,2):
 
             data=data[index]
             data = convertmat2mne(data)
-            easy_data.append(data)
-
-    for temp in os.listdir(med):
+            eeg_data_level.append(data)
         
-        read= os.path.join(med,temp)
-        data=scipy.io.loadmat(read)
-        index=temp.replace('.mat','')
-        if 'S12' in index or 'S20' in index or 'S21' in index or 'S7' in index:
-            continue
+    data_list= data_list + eeg_data_level
 
-        else:
-
-            data=data[index]
-            data = convertmat2mne(data)
-            med_data.append(data)
-
-    for temp in os.listdir(hard):
-
-        read= os.path.join(hard,temp)
-        data=scipy.io.loadmat(read)
-        index=temp.replace('.mat','')
-        
-        if 'S12' in index or 'S20' in index or 'S21' in index or 'S7' in index:
-            continue
-
-        else:
-
-            data=data[index]
-            data = convertmat2mne(data)
-            hard_data.append(data)
-
-easy_data_subject=easy_data
-med_data_subject=med_data
-hard_data_subject=hard_data
-
-easy_epochs_labels = [len(i)*[0] for i in easy_data_subject]
-
-med_epochs_labels = [len(i)*[1] for i in med_data_subject]
-hard_epochs_labels = [len(i)*[2] for i in hard_data_subject]
-
-# If training and testing for two classes 
-data_list = easy_data_subject+med_data_subject 
-label_list = (easy_epochs_labels) +(med_epochs_labels) 
-
-# If training and testing for three classes: 
-# data_list = easy_data_subject+med_data_subject+hard_data_subject;
-# label_list = (easy_epochs_labels) +(med_epochs_labels) +(hard_epochs_labels)
-
+    labels = [len(i)*[class_id] for i in eeg_data_level]
+    label_list= label_list + labels
+    
+    class_id = class_id +1 
+ 
 print(len(data_list),len(label_list))
-
-groups_list = [[i]*len(j) for i ,j in enumerate(data_list)]
 
 # shrink data here (if need be for testing/debugging) ->
 data_array = np.vstack(data_list) 
 data_array = data_array.reshape((data_array.shape[0],1,data_array.shape[1],data_array.shape[2])).astype(np.uint8)
 label_array = np.hstack(label_list)
-group_array = np.hstack(groups_list) 
 
 label_array=label_array.reshape(label_array.shape[0])
 
 print(data_array.shape,label_array.shape)
-print(group_array.shape)
 
 bias=0
 
-layers=[100,200,30]
-
+layers= config["snn"]["layers"]
 hidden_layers= [int(x) for x in layers]
 
 def gen_subject(hidden_layers,time_stamps_training,time_stamps_test,learning,decay,vth,pre,post,posttau,pretau,bias):
 
     threshold=vth
 
-    accuracy, accuracy_rf, accuracy_snn=multisnn.main(data_array,label_array,group_array,hidden_layers,time_stamps_training,time_stamps_test,learning,decay,threshold,pre,post,posttau,pretau,bias)
+    accuracy, accuracy_rf, accuracy_snn=multisnn.main(data_array,label_array,hidden_layers,time_stamps_training,time_stamps_test,learning,decay,threshold,pre,post,posttau,pretau,bias)
     
     print(f"RF Accuracy: {accuracy_rf} \n")
     
@@ -167,11 +121,8 @@ i=0.4
 
 vth.append(i)
 
-time_train=[]
-time_test=[]
-
-time_train = [20, 100, 600]
-time_test= [20, 100, 200, 300, 600]
+time_train = config["training"]["steps"]
+time_test= config["testing"]["steps"]
 
 param_grid= {'vth': vth, 'time_stamps_training': time_train,'time_stamps_test': time_test}
 
