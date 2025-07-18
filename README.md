@@ -64,20 +64,24 @@ A Generator is trained to produce realistic EEG-like features by injecting struc
 ## Citing Us
 
 ``` 
-
-  @inproceedings{bci2025COMPASS,
-  author    = {Amit Kumar and Anannya Mathur and Deepak Joshi},
-  title     = {Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks},
-  booktitle = {Proceedings of the ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS ’25)},
-  year      = {2025},
-  pages     = {1--6},
-  address   = {Toronto, ON, Canada},
-  month     = jul,
-  publisher = {ACM},
-  doi       = {10.1145/3715335.3736311},
-  url       = {https://doi.org/10.1145/3715335.3736311}
+  @inproceedings{10.1145/3715335.3736311,
+author = {Kumar, Amit and Mathur, Anannya and Joshi, Deepak},
+title = {Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks},
+year = {2025},
+isbn = {9798400714849},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3715335.3736311},
+doi = {10.1145/3715335.3736311},
+abstract = {Efficiently classifying brain signals in real-time with minimal computational power is crucial for bringing up brain-machine interfaces’ efficacy, particularly in energy consumption. Traditional neural networks often demand extensive computational resources and time for training, which is impractical for real-time applications. This paper proposes a novel approach leveraging spiking neural networks (SNNs) to address these challenges. Our study aims to develop a multi-layered SNN model capable of classifying brain signals in a few time steps of EEG recording. Coupled with the proposed SNN architecture, a Support Vector Classifier (SVC) is employed to integrate predictions from the generated spikes and an ensemble of decision trees deployed by XGBoost. The results were compared against a modified version of Symmetric Convolutional and Adversarial Neural Network. Our model achieves a peak accuracy of 43\% versus 38\% by the modified SCANN for three classes at 300 timesteps (=1500 ms) of EEG recording. In comparison, it achieves 60\% versus 50\% by SCANN for two classes at 100 timesteps (=500 ms) of EEG recording.},
+booktitle = {Proceedings of the ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies},
+pages = {666–671},
+numpages = {6},
+keywords = {Brain-Computer Interface, Spiking Neural Network, Power-Efficient Neural Architectures.},
+location = {
+},
+series = {COMPASS '25}
 }
-
 ```
  Amit Kumar, Anannya Mathur, and Deepak Joshi. 2025. Connecting Brains and Interfaces: Real-Time EEG-Based Stress Detection via Spiking Neural Networks. In ACM SIGCAS/SIGCHI Conference on Computing and Sustainable Societies (COMPASS ’25), July 22–25, 2025, Toronto, ON, Canada. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3715335.3736311
 
